@@ -1,0 +1,71 @@
+Getting env variables for app qvserver in org pklein011@gmail.com / space dev as pklein011@gmail.com...
+OK
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "cloudantNoSQLDB": [
+   {
+    "binding_name": null,
+    "credentials": {
+     "apikey": "35T_T6revOJTDXcSNEtSVLIA9ZlWVKmoZF8XjYek6U6f",
+     "host": "66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix.cloudantnosqldb.appdomain.cloud",
+     "iam_apikey_description": "Auto-generated for binding f818cc19-6c18-43be-ab26-27040d46dcf6",
+     "iam_apikey_name": "Cloudant-ds",
+     "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/73b1bf3361064d5fb259cbe6c6cdae09::serviceid:ServiceId-7d2eee0e-8f70-42bd-8382-f5cbb590ccd0",
+     "password": "2cd19928ee68a92b9263df18da986ebba41633e2554a73bdfa7065d40f03e2e7",
+     "port": 443,
+     "url": "https://66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix:2cd19928ee68a92b9263df18da986ebba41633e2554a73bdfa7065d40f03e2e7@66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix.cloudantnosqldb.appdomain.cloud",
+     "username": "66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix"
+    },
+    "instance_name": "qvDB",
+    "label": "cloudantNoSQLDB",
+    "name": "qvDB",
+    "plan": "Lite",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [
+     "data_management",
+     "ibm_created",
+     "lite",
+     "ibm_dedicated_public"
+    ],
+    "volume_mounts": []
+   }
+  ]
+ }
+}
+
+{
+ "VCAP_APPLICATION": {
+  "application_id": "0e2f8bf9-f284-4f84-9628-53be08d5b9cb",
+  "application_name": "qvserver",
+  "application_uris": [
+   "qvserver-grouchy-puku.mybluemix.net"
+  ],
+  "application_version": "ae7d4450-7b10-4af5-9ff8-e457d3457a49",
+  "cf_api": "https://api.us-south.cf.cloud.ibm.com",
+  "limits": {
+   "disk": 1024,
+   "fds": 16384,
+   "mem": 128
+  },
+  "name": "qvserver",
+  "space_id": "1c226db1-24c7-4644-ba99-e754a6ce6160",
+  "space_name": "dev",
+  "uris": [
+   "qvserver-grouchy-puku.mybluemix.net"
+  ],
+  "users": null,
+  "version": "ae7d4450-7b10-4af5-9ff8-e457d3457a49"
+ }
+}
+
+No user-defined env variables have been set
+
+Running Environment Variable Groups:
+BLUEMIX_REGION: ibm:yp:us-south
+
+Staging Environment Variable Groups:
+BLUEMIX_REGION: ibm:yp:us-south
+
