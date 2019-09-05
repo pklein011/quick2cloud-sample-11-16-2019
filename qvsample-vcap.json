@@ -1,0 +1,71 @@
+Getting env variables for app quick2cloud in org pklein011@gmail.com / space dev as pklein011@gmail.com...
+OK
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "cloudantNoSQLDB": [
+   {
+    "binding_name": null,
+    "credentials": {
+     "apikey": "sDE3_XR0pcFR5aQLye5iVHGt3IL1p_CI0DYQQFnUuqvB",
+     "host": "5589ae99-ad1f-463a-a4cf-7208bcc53b25-bluemix.cloudantnosqldb.appdomain.cloud",
+     "iam_apikey_description": "Auto-generated for binding 90440971-a908-4281-ad66-aa7ed53b7ad5",
+     "iam_apikey_name": "Cloudant-dz",
+     "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/73b1bf3361064d5fb259cbe6c6cdae09::serviceid:ServiceId-37412452-28d1-40cb-aa53-6ba49e166134",
+     "password": "d07e472a37f6e761580e2d813acc13e5fcceb82f6af086fb96e66fe22f5b561b",
+     "port": 443,
+     "url": "https://5589ae99-ad1f-463a-a4cf-7208bcc53b25-bluemix:d07e472a37f6e761580e2d813acc13e5fcceb82f6af086fb96e66fe22f5b561b@5589ae99-ad1f-463a-a4cf-7208bcc53b25-bluemix.cloudantnosqldb.appdomain.cloud",
+     "username": "5589ae99-ad1f-463a-a4cf-7208bcc53b25-bluemix"
+    },
+    "instance_name": "pklein011-qvDB",
+    "label": "cloudantNoSQLDB",
+    "name": "pklein011-qvDB",
+    "plan": "Lite",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [
+     "data_management",
+     "ibm_created",
+     "lite",
+     "ibm_dedicated_public"
+    ],
+    "volume_mounts": []
+   }
+  ]
+ }
+}
+
+{
+ "VCAP_APPLICATION": {
+  "application_id": "a5a5cbbd-3473-4a4c-a2a5-0e5d17c9fc86",
+  "application_name": "quick2cloud",
+  "application_uris": [
+   "quick2cloud-fearless-kookaburra.mybluemix.net"
+  ],
+  "application_version": "7a889f42-e5e8-4faa-b1a9-8de881412182",
+  "cf_api": "https://api.us-south.cf.cloud.ibm.com",
+  "limits": {
+   "disk": 1024,
+   "fds": 16384,
+   "mem": 128
+  },
+  "name": "quick2cloud",
+  "space_id": "1c226db1-24c7-4644-ba99-e754a6ce6160",
+  "space_name": "dev",
+  "uris": [
+   "quick2cloud-fearless-kookaburra.mybluemix.net"
+  ],
+  "users": null,
+  "version": "7a889f42-e5e8-4faa-b1a9-8de881412182"
+ }
+}
+
+No user-defined env variables have been set
+
+Running Environment Variable Groups:
+BLUEMIX_REGION: ibm:yp:us-south
+
+Staging Environment Variable Groups:
+BLUEMIX_REGION: ibm:yp:us-south
+

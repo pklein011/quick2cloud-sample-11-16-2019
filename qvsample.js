@@ -24,63 +24,6 @@ var listenPort = 8080;
 const vcapserv = "./VCAP_SERVICES.json";
 const vcapapp = "./VCAP_APPLICATION.json";
 
-var vcapS =  {
-	  "cloudantNoSQLDB": [
-	                      {
-	                       "binding_name": null,
-	                       "credentials": {
-	                        "apikey": "35T_T6revOJTDXcSNEtSVLIA9ZlWVKmoZF8XjYek6U6f",
-	                        "host": "66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix.cloudantnosqldb.appdomain.cloud",
-	                        "iam_apikey_description": "Auto-generated for binding f818cc19-6c18-43be-ab26-27040d46dcf6",
-	                        "iam_apikey_name": "Cloudant-ds",
-	                        "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/73b1bf3361064d5fb259cbe6c6cdae09::serviceid:ServiceId-7d2eee0e-8f70-42bd-8382-f5cbb590ccd0",
-	                        "password": "2cd19928ee68a92b9263df18da986ebba41633e2554a73bdfa7065d40f03e2e7",
-	                        "port": 443,
-	                        "url": "https://66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix:2cd19928ee68a92b9263df18da986ebba41633e2554a73bdfa7065d40f03e2e7@66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix.cloudantnosqldb.appdomain.cloud",
-	                        "username": "66662d51-5162-4a6a-ac4b-9755b37b6e18-bluemix"
-	                       },
-	                       "instance_name": "qvDB",
-	                       "label": "cloudantNoSQLDB",
-	                       "name": "qvDB",
-	                       "plan": "Lite",
-	                       "provider": null,
-	                       "syslog_drain_url": null,
-	                       "tags": [
-	                        "data_management",
-	                        "ibm_created",
-	                        "lite",
-	                        "ibm_dedicated_public"
-	                       ],
-	                       "volume_mounts": []
-	                      }
-	                     ]
-	                    }
-	                      ;
-     
-
-var vcapA = {
-	  "application_id": "0e2f8bf9-f284-4f84-9628-53be08d5b9cb",
-	  "application_name": "qvserver",
-	  "application_uris": [
-	   "qvserver-grouchy-puku.mybluemix.net"
-	  ],
-	  "application_version": "ae7d4450-7b10-4af5-9ff8-e457d3457a49",
-	  "cf_api": "https://api.us-south.cf.cloud.ibm.com",
-	  "limits": {
-	   "disk": 1024,
-	   "fds": 16384,
-	   "mem": 128
-	  },
-	  "name": "qvserver",
-	  "space_id": "1c226db1-24c7-4644-ba99-e754a6ce6160",
-	  "space_name": "dev",
-	  "uris": [
-	   "qvserver-grouchy-puku.mybluemix.net"
-	  ],
-	  "users": null,
-	  "version": "ae7d4450-7b10-4af5-9ff8-e457d3457a49"
-	 } ;
-	 
 	
 // Get the VCAP_SERVICES environment variables from the IBM Cloud	
  var  cfenv  = require("cfenv")
@@ -95,6 +38,7 @@ var vcapA = {
  // Those two commands already execute as part of the Quick2Cloud generated CLI commands so under normal conditions
  // the VCAP_LOCAL files are already in place.
  
+ 
 if (cfobj.isLocal == true) {
     
 	   var vapp         = fs.readFileSync("./VCAP_APPLICATION.json", "ascii"  ); 
@@ -103,9 +47,9 @@ if (cfobj.isLocal == true) {
 	   cfobj.services   = JSON.parse(vservices);  // Needed to keep the cfobj.services an Object and not a string
        
 // Here are a few important bits of data that you can extract from the CFENV facility
-       console.log("List of Services=" ,  cfobj.getServices());
-       console.log("qvDB URL=" , cfobj.getServiceURL("qvDB"));
-       console.log("credentials=" , cfobj.getServiceCreds("qvDB"));      
+//       console.log("List of Services=" ,  cfobj.getServices());
+//       console.log("qvDB URL=" , cfobj.getServiceURL("qvDB"));
+//       console.log("credentials=" , cfobj.getServiceCreds("qvDB"));      
 
 // Look into the VCAP_APPLICATION and VCAP_SERVICES files to see all the fields you can access and
 // take a look at CFENV NPM documentation to see some of the parsing capabilities the CFENV facility
@@ -124,7 +68,36 @@ console.log("Designed specifically as a Bootstraping a Server for the IBM Cloud"
 console.log(" ");
 console.log("Enabling Port " + listenPort + " for both the IBM Cloud and LocalHost");
 
+// If you provided a Cloudant Service as part of your College Course, then lets initialize it with two databases,
+// MAKE SURE YOU ADD YOUR DATABASE Service NAME that you named it during the Service provisioning process
+// Also, make sure you name your databases in LOWERCASE!
+// createDB
+//  First parm is the Database Service as named at the time you created the Service (it is also in the credentials)
+//  Second parm is the name of the database "qvsample" will be used to keep count of the times qvsample was started
+// Also, creates a database called "metering" it will keep track of any qvsample resource count you want.  Right now
+// is is tracking the number of times someone comes to the homepage (/).  These are called visits in the database.
+// You can see these database visits using the IBM Dashboard, clicking on the Cloudnat Service name and choosing the Cloudant 
+// dashboard.  The Cloudant dashboard is pretty useful.
 
+// Database calls are all async so they get created when Cloudant wants them created.  If you named something wrong or
+// have a misspelling, you must recycle qvsample to get the metering to work.  If the credentials or the VCAP files did not
+// get created correctly or they are missing or they were done outside of this directory - delete the Service by 
+// issuing "cf delete-service userID-qvDB -f" then restarting College Course 101 and regenerate it.
+
+// If no Cloudant Service or credentials were provisioned, the first DB call will figure that out and any dDatabase call after that 
+// will just return, not harming any execution, only disabling the metering of your resources.
+
+ if (tr.createDB("pklein011-qvDB", "qvsample")  == null) {console.log("Database qvsample failed creating");}
+ if (tr.createDB("pklein011-qvDB", "qvmetering")  == null) {console.log("Database qvmetering failed creating");}
+ 
+ // A few words about your use of Cloudant in IBM Cloud.  Initially, you are using the Cloudant Lite Plan which has restrictions.
+ // Basically, you get around 10 reads, 5 writes per/second (which is not a lot.)  If you go over the limits your database
+ // calls will fail and may disable all metering.  The way metering is written in this sample, care was taken so you would not
+ // exceed those limits.  If you modify what gets logged and how much gets logged, or you use the database for other
+ // purposes - keep in mind these limits because its easy to violate.  Also, you can upgrade from the Cloudant Lite plan
+ // to the Cloudant standard plan, for just a little fee, and the standard plan should give you lots of headroom.
+ 
+ 
 // Create an instance of a web server that receives requests from a web browser ('request') and 
 // returns a response ('response') to be rendered at the web browser
 http.createServer(function (request, response) {
@@ -178,6 +151,13 @@ http.createServer(function (request, response) {
  	if (request.url == '/') {
  		var rspRedirect = fs.readFileSync('./redirect.htm');  // The file contains the redirect page
  		    response.end(rspRedirect);
+ 		    
+// Here is where we do the metering.  This will count, in the Cloudant database, how many times your
+// homepage was visited.  Again, you can view these stats by clicking the Service name in the IBM Dashboard and
+// then selecting the Cloudant Dashboard
+ 		    
+ 		var urlPageLower = request.url.toLowerCase();
+ 	    tr.logVisits("qvmetering", urlPageLower);
  	}
 
 // When a request for a specific web page is asked for, we serve it up 	

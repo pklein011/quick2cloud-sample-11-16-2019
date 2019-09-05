@@ -1,23 +1,22 @@
-{"application": {
-  "application_id": "0e2f8bf9-f284-4f84-9628-53be08d5b9cb",
-  "application_name": "qvserver",
+ {
+  "application_id": "a5a5cbbd-3473-4a4c-a2a5-0e5d17c9fc86",
+  "application_name": "quick2cloud",
   "application_uris": [
-   "qvserver-grouchy-puku.mybluemix.net"
+   "quick2cloud-fearless-kookaburra.mybluemix.net"
   ],
-  "application_version": "ae7d4450-7b10-4af5-9ff8-e457d3457a49",
+  "application_version": "7a889f42-e5e8-4faa-b1a9-8de881412182",
   "cf_api": "https://api.us-south.cf.cloud.ibm.com",
   "limits": {
    "disk": 1024,
    "fds": 16384,
    "mem": 128
   },
-  "name": "qvserver",
+  "name": "quick2cloud",
   "space_id": "1c226db1-24c7-4644-ba99-e754a6ce6160",
   "space_name": "dev",
   "uris": [
-   "qvserver-grouchy-puku.mybluemix.net"
+   "quick2cloud-fearless-kookaburra.mybluemix.net"
   ],
   "users": null,
-  "version": "ae7d4450-7b10-4af5-9ff8-e457d3457a49"
+  "version": "7a889f42-e5e8-4faa-b1a9-8de881412182"
  }
-}
