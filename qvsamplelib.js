@@ -62,7 +62,11 @@ exports.removeURLSpecialChars = function(url)
 	 if (globalDBflg == false ) {return null;}
 	 var  fs     = require ('fs');
 	 var  cfenv  = require("cfenv")
-	 var  cfobj  = cfenv.getAppEnv();
+	 
+// cfenv needs the name of the application.  Some say it can figure it out by itself, I take no chances.  If you change the sample's
+// name don't forget to change it here a well.
+	 
+	 var  cfobj  = cfenv.getAppEnv("qvsample");
 	 
 //Get the Cloudant VCAP Variables from the system.  They are already in cfenv if this running in the
 //cloud or located in a file on the desktop if this is local.  If we can't find any part of the Cloudant Service , or the

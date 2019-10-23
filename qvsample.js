@@ -87,8 +87,13 @@ console.log("Enabling Port " + listenPort + " for both the IBM Cloud and LocalHo
 // If no Cloudant Service or credentials were provisioned, the first DB call will figure that out and any dDatabase call after that 
 // will just return, not harming any execution, only disabling the metering of your resources.
 
- if (tr.createDB("pklein011-qvDB", "qvsample")  == null) {console.log("Database qvsample failed creating");}
- if (tr.createDB("pklein011-qvDB", "qvmetering")  == null) {console.log("Database qvmetering failed creating");}
+//**********************************************
+//************* IMPORTANT **********************
+//**********************************************
+// You must add your Service Name to the following two statements for Cloudant to create a DB.  Change ibmID-DB to you database name
+
+ if (tr.createDB("ibmID-qvDB", "qvsample")  == null) {console.log("Database qvsample failed creating");}
+ if (tr.createDB("ibmID-qvDB", "qvmetering")  == null) {console.log("Database qvmetering failed creating");}
  
  // A few words about your use of Cloudant in IBM Cloud.  Initially, you are using the Cloudant Lite Plan which has restrictions.
  // Basically, you get around 10 reads, 5 writes per/second (which is not a lot.)  If you go over the limits your database
@@ -114,9 +119,18 @@ http.createServer(function (request, response) {
 	
 
 // Lets check for the browser's language,  operating system and any Cookies	
+	
+	try {
 	opEnvironment = request.headers['user-agent'];
  	opLanguage = request.headers['accept-language'];
  	browserCookies = request.headers['cookie'];
+	}
+	catch {}
+
+// Until supported, force to English
+
+//  console.log("Language=" + opLanguage);	
+	opLanguage = "en-US";
  	 	
 // The URL may have some special characters embedded so we want to translate them  to a more usable form
  	translatedURL = tr.removeURLSpecialChars(request.url);
