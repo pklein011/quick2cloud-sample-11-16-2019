@@ -19,7 +19,7 @@ var fs    = require ('fs');
 var tr    = require ('./qvsamplelib.js');  // External library for common functions
 
 
-var listenPort = 8080;
+var listenPort =  8080;
 
 const vcapserv = "./VCAP_SERVICES.json";
 const vcapapp = "./VCAP_APPLICATION.json";
@@ -41,10 +41,13 @@ const vcapapp = "./VCAP_APPLICATION.json";
  
 if (cfobj.isLocal == true) {
     
-	   var vapp         = fs.readFileSync("./VCAP_APPLICATION.json", "ascii"  ); 
+	   try {
+       var vapp         = fs.readFileSync("./VCAP_APPLICATION.json", "ascii"  ); 
 	   cfobj.app        = JSON.parse(vapp);  // Needed to keep the cfobj.app an Object and not a string
        var vservices    = fs.readFileSync("./VCAP_SERVICES.json" , "ascii"  );
 	   cfobj.services   = JSON.parse(vservices);  // Needed to keep the cfobj.services an Object and not a string
+       }
+       catch { };
        
 // Here are a few important bits of data that you can extract from the CFENV facility
 //       console.log("List of Services=" ,  cfobj.getServices());
@@ -95,6 +98,8 @@ console.log("Enabling Port " + listenPort + " for both the IBM Cloud and LocalHo
  if (tr.createDB("ibmID-qvDB", "qvsample")  == null) {console.log("Database qvsample failed creating");}
  if (tr.createDB("ibmID-qvDB", "qvmetering")  == null) {console.log("Database qvmetering failed creating");}
  
+ console.log("returned from creating DB"); 
+
  // A few words about your use of Cloudant in IBM Cloud.  Initially, you are using the Cloudant Lite Plan which has restrictions.
  // Basically, you get around 10 reads, 5 writes per/second (which is not a lot.)  If you go over the limits your database
  // calls will fail and may disable all metering.  The way metering is written in this sample, care was taken so you would not
@@ -227,7 +232,7 @@ http.createServer(function (request, response) {
   
 }) 
 
-  .listen(8080)  ;	
+  .listen(listenPort)  ;	
 	
  	
  
