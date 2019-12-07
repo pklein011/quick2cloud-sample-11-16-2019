@@ -4,5 +4,5 @@ RUN npm install @cloudant/cloudant
 RUN npm install cfenv
 RUN npm install express
 COPY . .
-EXPOSE 8081
+EXPOSE 8080
 CMD ["node", "qvsample.js"]
